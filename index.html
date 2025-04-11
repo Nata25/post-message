@@ -6,9 +6,9 @@
     <script
       id="rwc-embed-script"
       async
-      src="https://chat.qa.onereach.ai/lib/richWebChat.umd.min.js"
+      src="https://chat.staging.onereach.ai/lib/richWebChat.umd.min.js"
     ></script>
-    <link rel="stylesheet" href="https://chat.qa.onereach.ai/lib/richWebChat.css"/>
+    <link rel="stylesheet" href="https://chat.staging.onereach.ai/lib/richWebChat.css"/>
     <style>
       :root {
         color-scheme: light;
@@ -28,27 +28,23 @@
   </head>
   <body>
     <div class="wrapper">
-      <button id="button">Click me!</button>
+      <a href="https://nata25.github.io/post-message/inner">Inner</a>
+      <!-- <a href="http://127.0.0.1:5500/inner/index.html">Inner</a> -->
     </div>
     <div id="rwc">
     </div>
     <script>
+      window.addEventListener('message', (message) => {
+        if (message.data.name === 'buttonClicked') {
+          console.log('user reply was:', message.data.value);
+          localStorage.setItem('clickedButtonId', message.data.value);
+        }
+      });
+
       const scriptEl = document.getElementById('rwc-embed-script');
     
       scriptEl.addEventListener('load', initEmbedChat);
       initEmbedChat();
-
-      const button = document.getElementById('button');
-      button.addEventListener('click', () => {
-        alert('You clicked the button!');
-      });
-
-      window.addEventListener('message', (message) => {
-        if (message.data.name === 'buttonClicked') {
-          console.log('user reply was:', message.data.value);
-          button.click();
-        }
-      });
     
       function initEmbedChat() {
         var richWebChat = window.richWebChat;

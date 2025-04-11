@@ -1,0 +1,96 @@
+<!-- In <head> add scripts and styles to your html page -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <script
+    id="rwc-embed-script"
+    async
+    src="https://chat.staging.onereach.ai/lib/richWebChat.umd.min.js"
+  ></script>
+  <link rel="stylesheet" href="https://chat.staging.onereach.ai/lib/richWebChat.css"/>
+  <style>
+    :root {
+      color-scheme: light;
+    }
+  </style>
+  
+  <div id="wrapper">
+    <button id="button1">Solve issue 1</button>
+    <button id="button2">Solve issue 2</button>
+    <div id="rwc">
+    </div>
+  </div>
+  <script>
+    /* Button logic */
+    window.onload = function() {
+      const button1 = document.getElementById('button1');
+      const button2 = document.getElementById('button2');
+      button1.addEventListener('click', () => {
+        alert('Issue 1 solved!');
+      });
+      button2.addEventListener('click', () => {
+        alert('Issue 2 solved!');
+      });
+
+      const buttonId = localStorage.getItem('clickedButtonId');
+      console.log('button Id to click', buttonId);
+      if (buttonId) {
+        const button = document.getElementById(buttonId);
+        if (button) {
+          button.click();
+        }
+      }
+
+    }
+    /* Chat logic */
+    const scriptEl = document.getElementById('rwc-embed-script');
+    
+    scriptEl.addEventListener('load', initEmbedChat);
+    initEmbedChat();
+  
+    function initEmbedChat() {
+      var richWebChat = window.richWebChat;
+      if (window.isRwcEmbedLoaded || !richWebChat) {
+        return;
+      }
+      
+      window.isRwcEmbedLoaded = true;
+  
+      var RWC = richWebChat.default;
+      var app = new RWC({
+        container: '#rwc', // DOM element selector where chat will be inserted
+        // chatUrl: 'https://chat.qa.onereach.ai/VhBiKYesRSWBvfZZq6y-Vg/07uncpo', // url of your chat. required
+        chatUrl: 'https://chat.staging.onereach.ai/f84RZIZET1iHeuKgZf5gAw/00hodnv?__rwc_embed__=true',
+        
+        appearance: {
+          blurredBackground: false,
+          resizeable: false,
+          draggable: false,
+          saveChatSize: true,
+          preloadInBackground: false
+        },
+        
+        widget: {
+          position: 'bottom-right',
+          animation: 'pulse', // 'pulse', 'ring', 'zoom',
+          color: '#005fb1',
+          logoUrl: '',
+          revealDelay: 0,
+          openDelay: 15000,
+        },
+        
+        invitation: {
+          closeable: false,
+          imageUrl: '',
+          message: '',
+          buttonLabel: '',
+          appearDelay: 5000,
+          soundLocation: '',
+        },
+        
+        pageData: {
+          fname: 'foo'
+        }
+      })
+    };
+  </script>
