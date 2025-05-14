@@ -20,7 +20,7 @@
     <div id="rwc">
     </div>
   </div>
-  <script>
+  <script>    
     /* Button logic */
     window.onload = function() {
       const button1 = document.getElementById('button1');
@@ -33,7 +33,6 @@
       });
 
       const buttonId = localStorage.getItem('clickedButtonId');
-      console.log('button Id to click', buttonId);
       if (buttonId) {
         const button = document.getElementById(buttonId);
         if (button) {
@@ -60,7 +59,9 @@
       var app = new RWC({
         container: '#rwc', // DOM element selector where chat will be inserted
         // chatUrl: 'https://chat.qa.onereach.ai/VhBiKYesRSWBvfZZq6y-Vg/07uncpo', // url of your chat. required
-        chatUrl: 'https://chat.staging.onereach.ai/f84RZIZET1iHeuKgZf5gAw/00hodnv?__rwc_embed__=true',
+        // chatUrl: 'https://chat.staging.onereach.ai/f84RZIZET1iHeuKgZf5gAw/00hodnv?__rwc_embed__=true`&continueSession=true',
+        // chatUrl: 'https://chat.staging.onereach.ai/f84RZIZET1iHeuKgZf5gAw/0hymvst?__rwc_embed__=true`&continueSession=true', // From Hennadiy's
+        chatUrl: 'https://chat.staging.onereach.ai/f84RZIZET1iHeuKgZf5gAw/0398dh0?__rwc_embed__=true`&continueSession=true', // Mine latest to debug
         
         appearance: {
           blurredBackground: false,
@@ -73,10 +74,10 @@
         widget: {
           position: 'bottom-right',
           animation: 'pulse', // 'pulse', 'ring', 'zoom',
-          color: '#005fb1',
+          color: '#D32F2F',
           logoUrl: '',
           revealDelay: 0,
-          openDelay: 15000,
+          openDelay: 0,
         },
         
         invitation: {

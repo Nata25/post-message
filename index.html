@@ -28,18 +28,30 @@
   </head>
   <body>
     <div class="wrapper">
-      <a href="https://nata25.github.io/post-message/inner">Inner</a>
-      <!-- <a href="http://127.0.0.1:5500/inner/index.html">Inner</a> -->
+      <!-- <a href="https://nata25.github.io/post-message/inner">Inner</a> -->
+      <a href="http://127.0.0.1:5500/inner/index.html">Inner</a>
     </div>
     <div id="rwc">
     </div>
     <script>
+      /* Redirect logic */
+      // const ROOT_URL = 'http://127.0.0.1:5500';
+      const ROOT_URL = 'https://nata25.github.io/post-message/';
+      // const INNER_URL = 'http://127.0.0.1:5500/inner/index.html';
+      const INNER_URL = 'https://nata25.github.io/post-message/inner';
+
       window.addEventListener('message', (message) => {
         if (message.data.name === 'buttonClicked') {
-          console.log('user reply was:', message.data.value);
-          localStorage.setItem('clickedButtonId', message.data.value);
+          const choice = message.data.value;
+          const url = INNER_URL;
+          if (url) {
+            localStorage.setItem('clickedButtonId', choice);
+            window.open(url);
+          }
         }
       });
+
+      /* Chat logic */
 
       const scriptEl = document.getElementById('rwc-embed-script');
     
@@ -57,13 +69,14 @@
         var RWC = richWebChat.default;
         var app = new RWC({
           container: '#rwc', // DOM element selector where chat will be inserted
-          // chatUrl: 'https://chat.qa.onereach.ai/VhBiKYesRSWBvfZZq6y-Vg/07uncpo', // url of your chat. required
-          chatUrl: 'https://chat.staging.onereach.ai/f84RZIZET1iHeuKgZf5gAw/00hodnv?__rwc_embed__=true',
-          
+          // chatUrl: 'https://chat.qa.onereach.ai/VhBiKYesRSWBvfZZq6y-Vg/07uncpo',
+          // chatUrl: 'https://chat.staging.onereach.ai/f84RZIZET1iHeuKgZf5gAw/00hodnv?__rwc_embed__=true`&continueSession=true',
+          // chatUrl: 'https://chat.staging.onereach.ai/f84RZIZET1iHeuKgZf5gAw/0hymvst?__rwc_embed__=true`&continueSession=true',        
+          chatUrl: 'https://chat.staging.onereach.ai/f84RZIZET1iHeuKgZf5gAw/0398dh0?__rwc_embed__=true`&continueSession=true',
           appearance: {
             blurredBackground: false,
             resizeable: false,
-            draggable: false,
+            draggable: true,
             saveChatSize: true,
             preloadInBackground: false
           },
@@ -71,10 +84,10 @@
           widget: {
             position: 'bottom-right',
             animation: 'pulse', // 'pulse', 'ring', 'zoom',
-            color: '#005fb1',
+            color: '#D32F2F',
             logoUrl: '',
             revealDelay: 0,
-            openDelay: 15000,
+            openDelay: 0,
           },
           
           invitation: {
